@@ -1,27 +1,46 @@
 import React from "react";
-import { Container, Row, Col, Table, Button, FormControl } from "react-bootstrap";
-// import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-// import Table from "react-bootstrap/Table";
-// import Button from "react-bootstrap/Button";
+import {
+  Container,
+  Row,
+  Col,
+  Table,
+  Button,
+  FormControl,
+} from "react-bootstrap";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const ItemsManagement = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://192.168.1.26:3000/Item/getAll")
+      .then((response) => {
+        console.log(response.data.data);
+        setItems(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
-    <Container className="container-box shadow-sm"> 
+    <Container className="container-box shadow-sm">
       <Row>
         <Col>
-            <h5>Manejo de inventario</h5>
+          <h5>Manejo de inventario</h5>
         </Col>
-        <Col xl lg="1" >{/* TODO:Buscador */}
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+        <Col xl lg="1">
+          {/* TODO:Buscador */}
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         </Col>
         <Col md="auto">
           {/* TODO:Boton de agregar item */}
           <Button variant="secondary">Agregar ítem</Button>
         </Col>
         <Col md="auto">
-        {/* TODO:Boton de importar items */}
+          {/* TODO:Boton de importar items */}
           <Button variant="dark">Agregar ítems</Button>
         </Col>
       </Row>
@@ -35,23 +54,14 @@ const ItemsManagement = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {items.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.quantity}</td>
+              <td>{item.unit_price}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
