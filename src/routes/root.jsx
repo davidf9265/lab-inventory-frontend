@@ -1,21 +1,39 @@
-import { Container, Navbar, Nav } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Outlet, useLoaderData } from "react-router-dom";
+import { getItems } from "./Items";
 
 export default function Root() {
     return (
       <>
         <Navbar bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand href="#home">Inventario</Navbar.Brand>
+            <Navbar.Brand href="">Laboratorio</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="home/">Home</Nav.Link>
-              <Nav.Link href="componentes/">Componentes</Nav.Link>
-              <Nav.Link href="#pricing">Contacto</Nav.Link>
-              <Nav.Link href="#AcercaDe">Acerca de</Nav.Link>
+              <Nav.Link href="/home">Home</Nav.Link>
+              <NavDropdown title="Inventario" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/items">Items home</NavDropdown.Item>
+                <NavDropdown.Item href="/items/manageitems">
+                  Manejar inventario
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+              <Nav.Link to="#pricing">Contacto</Nav.Link>
+              <Nav.Link to="#AcercaDe">Acerca de</Nav.Link>
             </Nav>
           </Container>
         </Navbar>
-        <Outlet />
+        <div id="detail">
+            <Outlet />
+        </div>
       </>
     );
   }
+
+export async function loader() {
+  const items = await getItems();
+  return { items };
+}
