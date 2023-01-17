@@ -16,7 +16,7 @@ const AddItem = (props) => {
     const handleCreateItem = (event) =>{
         event.preventDefault();
 
-        axios.post('http://192.168.1.26:3000/Item/createNew', formData)
+        axios.post('http://192.168.1.92:3000/Item/createNew', formData)
             .then((response) => {
                 console.log(response.data);
             })
@@ -78,8 +78,21 @@ const AddItem = (props) => {
                 style={{ height: '200px' }}
             />
           </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Inserta una imagen para el item</Form.Label>
+          <Form.Group controlId="image0" className="mb-3">
+            <Form.Label>Imagen principal</Form.Label>
+            <Form.Control type="file" />
+          </Form.Group>
+          <Form.Group controlId="media1">
+            <Form.Label>Otros archivos de visualización</Form.Label>
+            <Form.Control type="file" />
+          </Form.Group>
+          <Form.Group controlId="media2">
+            <Form.Control type="file" />
+          </Form.Group>
+          <Form.Group controlId="media3">
+            <Form.Control type="file" />
+          </Form.Group>
+          <Form.Group controlId="media4">
             <Form.Control type="file" />
           </Form.Group>
           <Button type="submit">Crear ítem</Button>

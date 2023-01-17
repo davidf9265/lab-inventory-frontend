@@ -20,7 +20,7 @@ const ItemsManagement = () => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.1.26:3000/Item/getAll")
+      .get("http://192.168.1.92:3000/Item/getAll")
       .then((response) => {
         console.log(response.data.data);
         setItems(response.data.data);
