@@ -89,7 +89,7 @@ const AddItem = (props) => {
               Cantidad del componente.
             </Form.Text>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="price">
+          <Form.Group className="mb-3" controlId="unit_price">
             <Form.Label>Precio</Form.Label>
             <Form.Control
               type="text"

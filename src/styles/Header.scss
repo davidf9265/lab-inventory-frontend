@@ -1,0 +1,24 @@
+//@import 'vars';
+
+
+.menu {
+    display: none;    
+}
+// .navbar-left * {
+//     //display: flex; unused for now
+// }
+.navbar-right div{
+    display: flex;
+}
+
+@media (max-width: 640px) {
+	.menu {
+		display: block;
+	}
+	.navbar-left {
+		display: none;
+	}
+	.navbar-right {
+		display: none;
+	}
+}
